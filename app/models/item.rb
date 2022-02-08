@@ -31,7 +31,7 @@ class Item < ApplicationRecord
   end
 
   # 選択が「--」の時は保存不可
-  with_options numericality: { other_than: 0 , message: "can't be blank" } do
+  with_options numericality: { other_than: 0, message: "can't be blank" } do
     validates :category_id
     validates :condition_id
     validates :shipping_cost_id
