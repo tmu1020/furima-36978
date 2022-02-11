@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_cost
   belongs_to_active_hash :shipping_day
   belongs_to_active_hash :prefecture
-  
+
   has_one_attached :image
 
   with_options presence: true do
@@ -27,6 +27,7 @@ class Item < ApplicationRecord
     validates :prefecture_id
   end
   # 半角数字かつ、¥300〜¥9,999,999の間で保存可能
-  validates :price, numericality: { message: "is invalid. Input half-width characters" }
-  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: "is out of setting range" }
+  validates :price, numericality: { message: 'is invalid. Input half-width characters' }
+  validates :price,
+            numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'is out of setting range' }
 end

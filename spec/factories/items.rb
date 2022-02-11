@@ -2,8 +2,8 @@ FactoryBot.define do
   factory :item do
     association :user
 
-    item_name        {'test-item'}
-    description      {'test'}
+    item_name        { 'test-item' }
+    description      { 'test' }
     category_id      { 1 }
     condition_id     { 1 }
     shipping_cost_id { 1 }
