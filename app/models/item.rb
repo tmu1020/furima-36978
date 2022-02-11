@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   belongs_to :user
-  has_one    :purchase_record
+  # has_one    :purchase_record
 
   belongs_to_active_hash :category
   belongs_to_active_hash :condition
@@ -26,8 +26,8 @@ class Item < ApplicationRecord
     validates :shipping_day_id
     validates :prefecture_id
   end
-  # 半角数字かつ、¥300〜¥9,999,999の間で保存可能
-  validates :price, numericality: { message: 'is invalid. Input half-width characters' }
+  # 半角数字かつ、整数かつ、¥300〜¥9,999,999の間で保存可能
+  validates :price, numericality: { only_integer: true, message: 'is invalid. Input half-width characters' }
   validates :price,
             numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'is out of setting range' }
 end
