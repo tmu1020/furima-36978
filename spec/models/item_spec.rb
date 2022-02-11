@@ -63,6 +63,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is invalid. Input half-width characters')
       end
+      it 'priceが整数でなければ出品できない' do
+        @item.price = 300.5
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is invalid. Input half-width characters')
+      end
       it 'priceが¥300未満では出品できない' do
         @item.price = 299
         @item.valid?
