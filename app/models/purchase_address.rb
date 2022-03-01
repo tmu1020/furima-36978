@@ -1,10 +1,12 @@
 class PurchaseAddress
   include ActiveModel::Model
 
-  attr_accessor :token, :user_id, :item_id, :post_code, :prefecture_id, :city,
+  attr_accessor :user_id, :item_id, :token, :post_code, :prefecture_id, :city,
                 :address, :building_name, :phone_number, :purchase_record_id
 
   with_options presence: true do
+    validates :user_id
+    validates :item_id
     validates :token
     validates :post_code
     validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
@@ -13,7 +15,8 @@ class PurchaseAddress
     validates :phone_number
   end
   validates :post_code, format: { with: /\A\d{3}-\d{4}\z/, message: 'is invalid. Enter it as follows (e.g. 123-4567)' }
-  validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is too short' }
+  validates :phone_number, length: { minimum: 10, message: 'is too short' }
+  validates :phone_number, length: { maximum: 11, message: 'is too long' }
   validates :phone_number, numericality: { only_integer: true, message: 'is invalid. Input only number' }
 
   def save
