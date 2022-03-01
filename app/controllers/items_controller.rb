@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :contributor_confirmation, only: [:edit, :update, :destroy]
-  # before_action :purchase_confirmation, only: [:edit, :update]
+  before_action :purchase_confirmation, only: [:edit, :update]
 
   def index
     @items = Item.all.order(created_at: :desc)
@@ -59,8 +59,6 @@ class ItemsController < ApplicationController
   end
 
   def purchase_confirmation
-    # if @item.purchase_record.present?
-    # redirect_to root_path
-    # end
+    redirect_to root_path if @item.purchase_record.present?
   end
 end
