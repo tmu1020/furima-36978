@@ -14,7 +14,9 @@ class PurchaseAddress
     validates :address
     validates :phone_number
   end
+  # 郵便番号ハイフンありの指定
   validates :post_code, format: { with: /\A\d{3}-\d{4}\z/, message: 'is invalid. Enter it as follows (e.g. 123-4567)' }
+  # 電話番号10〜11桁、半角数字、整数の指定
   validates :phone_number, length: { minimum: 10, message: 'is too short' }
   validates :phone_number, length: { maximum: 11, message: 'is too long' }
   validates :phone_number, numericality: { only_integer: true, message: 'is invalid. Input only number' }
